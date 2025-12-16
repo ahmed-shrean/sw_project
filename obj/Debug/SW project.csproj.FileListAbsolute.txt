@@ -1,0 +1,24 @@
+C:\Users\M L A\source\repos\SW project\SW project\bin\Debug\SW project.exe
+C:\Users\M L A\source\repos\SW project\SW project\bin\Debug\SW project.pdb
+C:\Users\M L A\source\repos\SW project\SW project\bin\Debug\SW project.exe.config
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.csproj.AssemblyReference.cache
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.exe.config
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.add_courses.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.add_task.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.courses.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.grades.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.home.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.Formlogin.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.note.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.regForm.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.Properties.Resources.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.take_note.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.task.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.csproj.GenerateResource.cache
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.csproj.CoreCompileInputs.cache
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.exe
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.pdb
+C:\Users\M L A\source\repos\SW project\SW project\bin\Debug\SW project.exe.manifest
+C:\Users\M L A\source\repos\SW project\SW project\bin\Debug\SW project.application
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.exe.manifest
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.application
