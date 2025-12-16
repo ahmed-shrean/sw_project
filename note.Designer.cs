@@ -1,0 +1,75 @@
+﻿namespace SW_project
+{
+    partial class note
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.noteReturn = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // noteReturn
+            // 
+            this.noteReturn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.noteReturn.Location = new System.Drawing.Point(24, 44);
+            this.noteReturn.Name = "noteReturn";
+            this.noteReturn.Size = new System.Drawing.Size(90, 40);
+            this.noteReturn.TabIndex = 18;
+            this.noteReturn.Text = "Home";
+            this.noteReturn.UseVisualStyleBackColor = false;
+            this.noteReturn.Click += new System.EventHandler(this.addTaskReturn_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(203, 119);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(548, 268);
+            this.dataGridView1.TabIndex = 19;
+            // 
+            // note
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.noteReturn);
+            this.Name = "note";
+            this.Text = "note";
+            this.Load += new System.EventHandler(this.note_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button noteReturn;
+        private System.Windows.Forms.DataGridView dataGridView1;
+    }
+}
