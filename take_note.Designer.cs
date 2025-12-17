@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.context = new System.Windows.Forms.TextBox();
-            this.note_note = new System.Windows.Forms.TextBox();
+            this.Content = new System.Windows.Forms.TextBox();
+            this.note_course = new System.Windows.Forms.TextBox();
             this.take_notebutt = new System.Windows.Forms.Button();
             this.takeNoteReturn = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -41,36 +41,37 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(137, 134);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "context";
+            this.label1.Text = "Content";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(137, 204);
+            this.label2.Location = new System.Drawing.Point(137, 260);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "course";
             // 
-            // context
+            // Content
             // 
-            this.context.Location = new System.Drawing.Point(272, 127);
-            this.context.Name = "context";
-            this.context.Size = new System.Drawing.Size(100, 20);
-            this.context.TabIndex = 2;
+            this.Content.Location = new System.Drawing.Point(272, 48);
+            this.Content.Multiline = true;
+            this.Content.Name = "Content";
+            this.Content.Size = new System.Drawing.Size(464, 203);
+            this.Content.TabIndex = 2;
             // 
-            // note_note
+            // note_course
             // 
-            this.note_note.Location = new System.Drawing.Point(272, 197);
-            this.note_note.Name = "note_note";
-            this.note_note.Size = new System.Drawing.Size(100, 20);
-            this.note_note.TabIndex = 3;
+            this.note_course.Location = new System.Drawing.Point(272, 257);
+            this.note_course.Name = "note_course";
+            this.note_course.Size = new System.Drawing.Size(100, 20);
+            this.note_course.TabIndex = 3;
             // 
             // take_notebutt
             // 
-            this.take_notebutt.Location = new System.Drawing.Point(272, 245);
+            this.take_notebutt.Location = new System.Drawing.Point(272, 337);
             this.take_notebutt.Name = "take_notebutt";
             this.take_notebutt.Size = new System.Drawing.Size(75, 23);
             this.take_notebutt.TabIndex = 4;
@@ -96,8 +97,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.takeNoteReturn);
             this.Controls.Add(this.take_notebutt);
-            this.Controls.Add(this.note_note);
-            this.Controls.Add(this.context);
+            this.Controls.Add(this.note_course);
+            this.Controls.Add(this.Content);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "take_note";
@@ -112,8 +113,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox context;
-        private System.Windows.Forms.TextBox note_note;
+        private System.Windows.Forms.TextBox Content;
+        private System.Windows.Forms.TextBox note_course;
         private System.Windows.Forms.Button take_notebutt;
         private System.Windows.Forms.Button takeNoteReturn;
     }

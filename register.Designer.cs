@@ -84,6 +84,7 @@
             // 
             this.regPass.Location = new System.Drawing.Point(246, 210);
             this.regPass.Name = "regPass";
+            this.regPass.PasswordChar = '*';
             this.regPass.Size = new System.Drawing.Size(100, 20);
             this.regPass.TabIndex = 5;
             // 
@@ -107,6 +108,7 @@
             this.email_error.Size = new System.Drawing.Size(89, 13);
             this.email_error.TabIndex = 7;
             this.email_error.Text = "enter valied email";
+            this.email_error.Visible = false;
             this.email_error.Click += new System.EventHandler(this.email_error_Click);
             // 
             // regForm

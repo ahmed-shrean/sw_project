@@ -28,14 +28,24 @@ FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
         {
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
-            string query = "SELECT Content,CreatedAt,CourseID FROM Notes";
+            // The query is perfect
+            string query = "SELECT Content, CreatedAt, CourseName FROM Notes INNER JOIN Courses ON Notes.CourseID = Courses.CourseID;";
             SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString);
 
             DataTable table = new DataTable();
-
             adapter.Fill(table);
 
+            // 1. Set the height for the rows
+            dataGridView1.RowTemplate.Height = 120;
+
+            // 2. IMPORTANT: Enable text wrapping so the text uses the 120px height
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            // 3. Load the data
             dataGridView1.DataSource = table;
+
+            // 4. Optional: Fill the width of the screen
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void addTaskReturn_Click(object sender, EventArgs e)
@@ -46,7 +56,12 @@ FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
             nextForm.Show();
 
 
-            this.Hide();
+            this.Close();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

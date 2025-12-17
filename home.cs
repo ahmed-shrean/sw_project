@@ -102,5 +102,16 @@ namespace SW_project
 
             this.Hide();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            addgrade nextForm = new addgrade();
+
+
+            nextForm.Show();
+
+
+            this.Hide();
+        }
     }
 }

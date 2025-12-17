@@ -52,7 +52,7 @@ namespace SW_project
 
 
                         nextForm.Show();
-
+                        nextForm.FormClosed += (s,r) => this.Close();
 
                         this.Hide();
 

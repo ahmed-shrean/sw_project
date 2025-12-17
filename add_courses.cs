@@ -74,8 +74,7 @@ namespace SW_project
 
                     MessageBox.Show("course added ");
 
-                    // نقفل الفورم الصغيرة دي بعد الحفظ
-                    this.Close();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +91,12 @@ namespace SW_project
             nextForm.Show();
 
 
-            this.Hide();
+            this.Close();
+        }
+
+        private void creditHours_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -48,7 +48,7 @@ FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
             nextForm.Show();
 
 
-            this.Hide();
+            this.Close();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

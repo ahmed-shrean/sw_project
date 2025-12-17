@@ -86,6 +86,7 @@
             this.creditHours.Name = "creditHours";
             this.creditHours.Size = new System.Drawing.Size(100, 20);
             this.creditHours.TabIndex = 5;
+            this.creditHours.TextChanged += new System.EventHandler(this.creditHours_TextChanged);
             // 
             // add_courseButt
             // 

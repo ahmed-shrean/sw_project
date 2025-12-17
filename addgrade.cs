@@ -2,37 +2,44 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-/*CREATE TABLE Notes (
-    NoteID INT PRIMARY KEY IDENTITY(1,1),
-    Content NVARCHAR(MAX) NOT NULL,
-    CreatedAt DATETIME DEFAULT GETDATE(),
+namespace SW_project
+/*
+ CREATE TABLE Grades (
+    GradeID INT PRIMARY KEY IDENTITY(1,1),
+    ExamName NVARCHAR(50), -- e.g., Midterm, Final
+    Score FLOAT NOT NULL,
+    MaxScore FLOAT NOT NULL,
     CourseID INT NOT NULL, -- Foreign Key to link with Course
     FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
 );
-GO*/
-namespace SW_project
+G
+ */
 {
-    public partial class take_note : Form
+    public partial class addgrade : Form
     {
-        public take_note()
+        public addgrade()
         {
             InitializeComponent();
         }
 
-        private void take_notebutt_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Content.Text) || string.IsNullOrWhiteSpace(note_course.Text))
+
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(examname.Text) || string.IsNullOrWhiteSpace(course.Text)|| string.IsNullOrWhiteSpace(max_score.Text)|| string.IsNullOrWhiteSpace(score.Text))
             {
-                MessageBox.Show("Please enter both the Note Content and the Course Name.");
+                MessageBox.Show("Please enter all the record.");
                 return;
             }
-
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -42,16 +49,18 @@ namespace SW_project
                     con.Open();
 
                     // 2. The Smart Query: Finds the CourseID based on the Name and Inserts the Note
-                    string query = @"INSERT INTO Notes (Content, CourseID) 
-                             SELECT @Content, CourseID 
+                    string query = @"INSERT INTO Grades (ExamName, Score,MaxScore) 
+                             SELECT @ExamName, @Score,@MaxScore, CourseID 
                              FROM Courses 
                              WHERE CourseName = @CourseName";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         // 3. Add Parameters (Prevents errors and hacking)
-                        cmd.Parameters.AddWithValue("@Content", Content.Text);
-                        cmd.Parameters.AddWithValue("@CourseName", note_course.Text);
+                        cmd.Parameters.AddWithValue("@ExamName", examname.Text);
+                        cmd.Parameters.AddWithValue("@CourseName", course.Text);
+                        cmd.Parameters.AddWithValue("@MaxScore", max_score.Text);
+                        cmd.Parameters.AddWithValue("@Score", score.Text);
 
                         // 4. Execute
                         int rowsAffected = cmd.ExecuteNonQuery();
@@ -60,7 +69,10 @@ namespace SW_project
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Note saved successfully!");
-                            Content.Clear(); 
+                            examname.Clear();
+                            course.Clear();
+                            max_score.Clear();
+                            score.Clear();
                         }
                         else
                         {
@@ -74,13 +86,10 @@ namespace SW_project
                     MessageBox.Show("Database Error: " + ex.Message);
                 }
             }
-        }
-        private void take_note_Load(object sender, EventArgs e)
-        {
 
         }
 
-        private void takeNoteReturn_Click(object sender, EventArgs e)
+        private void gradesReturn_Click(object sender, EventArgs e)
         {
             home nextForm = new home();
 
@@ -89,6 +98,7 @@ namespace SW_project
 
 
             this.Close();
+
         }
     }
 }

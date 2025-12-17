@@ -75,7 +75,7 @@ namespace SW_project
 
                     Formlogin nextForm = new Formlogin();
                     nextForm.Show();
-                    this.Hide();
+                    this.Close();
 
                 }
                 catch (SqlException sqlEx)
@@ -101,7 +101,11 @@ namespace SW_project
 
         private void email_error_Click(object sender, EventArgs e)
         {
-           email_error.Visible = false; 
+            string emailPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|([-a-zA-Z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-zA-Z0-9!#$%&'*+/=?^_`{|}~]+)*))@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$";
+            if (Regex.IsMatch(regEmail.Text,emailPattern))
+            
+           { email_error.Visible = false; }
+            else { email_error.Visible = true; }
         }
     }
 }
