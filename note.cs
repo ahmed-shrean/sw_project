@@ -28,24 +28,46 @@ FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
         {
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
-            // The query is perfect
-            string query = "SELECT Content, CreatedAt, CourseName FROM Notes INNER JOIN Courses ON Notes.CourseID = Courses.CourseID;";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString);
+            // 1. تعديل الاستعلام لإضافة شرط المستخدم الحالي (UserID)
+            string query = @"SELECT Notes.Content, Notes.CreatedAt, Courses.CourseName 
+                 FROM Notes 
+                 INNER JOIN Courses ON Notes.CourseID = Courses.CourseID 
+                 WHERE Notes.UserID = @uid";
 
-            DataTable table = new DataTable();
-            adapter.Fill(table);
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // استخدمنا SqlCommand هنا لدعم الباراميترات (الخصوصية)
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@uid", UserSession.UserID);
 
-            // 1. Set the height for the rows
-            dataGridView1.RowTemplate.Height = 120;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
 
-            // 2. IMPORTANT: Enable text wrapping so the text uses the 120px height
-            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                try
+                {
+                    adapter.Fill(table);
 
-            // 3. Load the data
-            dataGridView1.DataSource = table;
+                    // 2. إعدادات التصميم لـ DataGridView
+                    dataGridView1.RowTemplate.Height = 120;
+                    dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
-            // 4. Optional: Fill the width of the screen
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    // منع إضافة سطور فارغة يدوياً وتغيير حجم الأعمدة تلقائياً
+                    dataGridView1.AllowUserToAddRows = false;
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                    // 3. تحميل البيانات
+                    dataGridView1.DataSource = table;
+
+                    // 4. تحسين شكل رؤوس الأعمدة (اختياري)
+                    dataGridView1.Columns["Content"].HeaderText = "الملاحظة";
+                    dataGridView1.Columns["CreatedAt"].HeaderText = "تاريخ الإنشاء";
+                    dataGridView1.Columns["CourseName"].HeaderText = "اسم الكورس";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ أثناء عرض البيانات: " + ex.Message);
+                }
+            }
         }
 
         private void addTaskReturn_Click(object sender, EventArgs e)

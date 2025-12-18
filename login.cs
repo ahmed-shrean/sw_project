@@ -30,7 +30,7 @@ namespace SW_project
         private void button1_Click(object sender, EventArgs e)
         {
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
-            string query = "SELECT COUNT(*) FROM Users WHERE Username = @user AND PasswordHash = @pass";
+            string query = "SELECT UserID FROM Users WHERE Username = @user AND PasswordHash = @pass";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -46,8 +46,11 @@ namespace SW_project
 
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (result > 0)
+                    if (result!=null)
                     {
+
+                        UserSession.UserID = Convert.ToInt32(result);
+                        UserSession.Username = user_name.Text;
                         home nextForm = new home();
 
 

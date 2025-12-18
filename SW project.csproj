@@ -142,6 +142,7 @@
     <Compile Include="task.Designer.cs">
       <DependentUpon>task.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserSession.cs" />
     <EmbeddedResource Include="addgrade.resx">
       <DependentUpon>addgrade.cs</DependentUpon>
     </EmbeddedResource>

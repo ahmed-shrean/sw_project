@@ -37,44 +37,49 @@ namespace SW_project
 
         private void add_courseButt_Click(object sender, EventArgs e)
         {
-            
 
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
-            string addTaskQuery = "INSERT INTO Tasks (CourseName,CourseCode,CreditHours)VALUES(@name,@code,@hours)";
+
+            // 1. تعديل جملة الـ INSERT لتشمل الـ UserID
+            string addTaskQuery = "INSERT INTO Courses (CourseName, CourseCode, CreditHours, UserID) VALUES (@name, @code, @hours, @uid)";
+
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
                     con.Open();
-                    string checkQuery = "SELECT COUNT(*) FROM Tasks WHERE CourseName = @name OR CourseCode = @code";
+
+                    // 2. البحث عن التكرار في جدول Courses وليس Tasks، ولنفس المستخدم فقط
+                    string checkQuery = "SELECT COUNT(*) FROM Courses WHERE (CourseName = @name OR CourseCode = @code) AND UserID = @uid";
 
                     SqlCommand checkCmd = new SqlCommand(checkQuery, con);
                     checkCmd.Parameters.AddWithValue("@name", couresName.Text);
                     checkCmd.Parameters.AddWithValue("@code", courseCode.Text);
+                    checkCmd.Parameters.AddWithValue("@uid", UserSession.UserID); // استخدام الـ ID المحفوظ
 
-                    int count = (int)checkCmd.ExecuteScalar(); // بترجع رقم (عدد المتشابهات)
+                    int count = (int)checkCmd.ExecuteScalar();
 
                     if (count > 0)
                     {
-                        MessageBox.Show("عفواً، اسم الكورس أو الكود موجود بالفعل! 🚫");
-                        return; // وقف الكود وماتكملش إضافة
+                        MessageBox.Show("عفواً، هذا الكورس مضاف لديك بالفعل! 🚫");
+                        return;
                     }
+
+                    // 3. تنفيذ إضافة الكورس
                     SqlCommand cmd = new SqlCommand(addTaskQuery, con);
-
-                    // 3. ملي الفراغات
                     cmd.Parameters.AddWithValue("@name", couresName.Text);
-
-                    // انتبه: بناخد التاريخ من الـ Value مش Text
                     cmd.Parameters.AddWithValue("@code", courseCode.Text);
-
                     cmd.Parameters.AddWithValue("@hours", creditHours.Text);
+                    cmd.Parameters.AddWithValue("@uid", UserSession.UserID); // ربط الكورس باليوزر الحالي
 
-                    // 4. التنفيذ
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("course added ");
+                    MessageBox.Show("تم إضافة الكورس بنجاح ✅");
 
-                    
+                    // اختيار اختياري: مسح الخانات بعد الإضافة
+                    couresName.Clear();
+                    courseCode.Clear();
+                    creditHours.Clear();
                 }
                 catch (Exception ex)
                 {
@@ -82,7 +87,6 @@ namespace SW_project
                 }
             }
         }
-
         private void addCourseReturn_Click(object sender, EventArgs e)
         {
             home nextForm = new home();

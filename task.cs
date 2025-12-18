@@ -30,14 +30,45 @@ FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
         {
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
-            string query = "SELECT Title,Description,Deadline,IsCompleted ,CourseID FROM Tasks";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString);
+            // 1. استخدام INNER JOIN لجلب اسم الكورس وفلترة البيانات حسب المستخدم
+            string query = @"SELECT Tasks.Title, Tasks.Description, Tasks.Deadline, 
+                 Tasks.IsCompleted, Courses.CourseName 
+                 FROM Tasks 
+                 INNER JOIN Courses ON Tasks.CourseID = Courses.CourseID 
+                 WHERE Tasks.UserID = @uid";
 
-            DataTable table = new DataTable();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@uid", UserSession.UserID);
 
-            adapter.Fill(table);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
 
-            dataGridView1.DataSource = table;
+                try
+                {
+                    adapter.Fill(table);
+
+                    // 2. تنسيق الجدول
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.AllowUserToAddRows = false;
+                    dataGridView1.ReadOnly = true;
+
+                    // 3. ربط البيانات
+                    dataGridView1.DataSource = table;
+
+                    // 4. تحسين مظهر أسماء الأعمدة
+                    dataGridView1.Columns["Title"].HeaderText = "المهمة";
+                    dataGridView1.Columns["Description"].HeaderText = "الوصف";
+                    dataGridView1.Columns["Deadline"].HeaderText = "الموعد النهائي";
+                    dataGridView1.Columns["IsCompleted"].HeaderText = "تم الإنجاز";
+                    dataGridView1.Columns["CourseName"].HeaderText = "الكورس";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في تحميل المهام: " + ex.Message);
+                }
+            }
         }
 
         private void TaskReturn_Click(object sender, EventArgs e)

@@ -29,17 +29,46 @@ namespace SW_project
 
         private void grades_Load(object sender, EventArgs e)
         {
-
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
-            string query = "SELECT ExamName,Score,MaxScore,CourseName FROM Grades INNER JOIN Courses ON Grades.CourseID = Courses.CourseID;";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString);
-           
-            DataTable table = new DataTable();
+            // 1. تعديل الاستعلام لإضافة شرط الخصوصية (UserID)
+            string query = @"SELECT Grades.ExamName, Grades.Score, Grades.MaxScore, Courses.CourseName 
+                 FROM Grades 
+                 INNER JOIN Courses ON Grades.CourseID = Courses.CourseID 
+                 WHERE Grades.UserID = @uid";
 
-            adapter.Fill(table);
-           
-            dataGridView1.DataSource = table;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // استخدام SqlCommand لتمرير الباراميتر بشكل آمن
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@uid", UserSession.UserID);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+
+                try
+                {
+                    adapter.Fill(table);
+
+                    // 2. تحسين شكل الـ DataGridView
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.AllowUserToAddRows = false;
+                    dataGridView1.ReadOnly = true;
+
+                    // 3. ربط البيانات
+                    dataGridView1.DataSource = table;
+
+                    // 4. تغيير أسماء رؤوس الأعمدة لتظهر بالعربية
+                    dataGridView1.Columns["ExamName"].HeaderText = "اسم الامتحان";
+                    dataGridView1.Columns["Score"].HeaderText = "الدرجة";
+                    dataGridView1.Columns["MaxScore"].HeaderText = "الدرجة النهائية";
+                    dataGridView1.Columns["CourseName"].HeaderText = "اسم الكورس";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في تحميل الدرجات: " + ex.Message);
+                }
+            }
         }
 
         private void gradesReturn_Click(object sender, EventArgs e)

@@ -41,31 +41,28 @@ namespace SW_project
                 {
                     con.Open();
 
-                    // 2. The Smart Query: Finds the CourseID based on the Name and Inserts the Note
-                    string query = @"INSERT INTO Notes (Content, CourseID) 
-                             SELECT @Content, CourseID 
-                             FROM Courses 
-                             WHERE CourseName = @CourseName";
+                    string query = @"INSERT INTO Notes (Content, CourseID, UserID) 
+                         SELECT @Content, CourseID, UserID 
+                         FROM Courses 
+                         WHERE CourseName = @CourseName AND UserID = @UserID";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        // 3. Add Parameters (Prevents errors and hacking)
                         cmd.Parameters.AddWithValue("@Content", Content.Text);
                         cmd.Parameters.AddWithValue("@CourseName", note_course.Text);
+                        cmd.Parameters.AddWithValue("@UserID", UserSession.UserID);
 
-                        // 4. Execute
                         int rowsAffected = cmd.ExecuteNonQuery();
 
-                        // 5. Check if it worked
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Note saved successfully!");
-                            Content.Clear(); 
+                            Content.Clear();
+                            note_course.Clear();
                         }
                         else
                         {
-                            // If rowsAffected is 0, it means the Course Name didn't exist in the database
-                            MessageBox.Show("Error: The Course Name you entered does not exist. Please check the spelling.");
+                            MessageBox.Show("Error: The Course Name you entered does not exist for your account.");
                         }
                     }
                 }

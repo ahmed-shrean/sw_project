@@ -29,14 +29,40 @@ namespace SW_project
         {
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
-            string query = "SELECT CourseName,CourseCode,CreditHours FROM Courses";
-            SqlDataAdapter adapter = new SqlDataAdapter(query, connectionString);
+            // 1. إضافة شرط WHERE لضمان الخصوصية
+            string query = "SELECT CourseName, CourseCode, CreditHours FROM Courses WHERE UserID = @uid";
 
-            DataTable table = new DataTable();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // استخدمنا SqlCommand لدعم الباراميترات
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@uid", UserSession.UserID);
 
-            adapter.Fill(table);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
 
-            dataGridView1.DataSource = table;
+                try
+                {
+                    adapter.Fill(table);
+
+                    // 2. تحسين شكل الـ DataGridView
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.AllowUserToAddRows = false; // لمنع ظهور السطر الفارغ الأخير
+                    dataGridView1.ReadOnly = true; // لمنع اليوزر من تعديل البيانات مباشرة في الجدول
+
+                    // 3. ربط البيانات
+                    dataGridView1.DataSource = table;
+
+                    // 4. تغيير أسماء الأعمدة لتظهر بشكل احترافي
+                    dataGridView1.Columns["CourseName"].HeaderText = "اسم الكورس";
+                    dataGridView1.Columns["CourseCode"].HeaderText = "كود المادة";
+                    dataGridView1.Columns["CreditHours"].HeaderText = "الساعات المعتمدة";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في تحميل البيانات: " + ex.Message);
+                }
+            }
         }
 
         private void courseReturn_Click(object sender, EventArgs e)

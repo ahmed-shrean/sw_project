@@ -34,10 +34,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.note_course = new System.Windows.Forms.TextBox();
             this.laa = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.addTaskReturn = new System.Windows.Forms.Button();
+            this.courseComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // add_taskButt
@@ -92,14 +92,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "titel";
             // 
-            // note_course
-            // 
-            this.note_course.Location = new System.Drawing.Point(291, 267);
-            this.note_course.Name = "note_course";
-            this.note_course.Size = new System.Drawing.Size(100, 20);
-            this.note_course.TabIndex = 15;
-            this.note_course.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // laa
             // 
             this.laa.AutoSize = true;
@@ -128,14 +120,23 @@
             this.addTaskReturn.UseVisualStyleBackColor = false;
             this.addTaskReturn.Click += new System.EventHandler(this.addTaskReturn_Click);
             // 
+            // courseComboBox
+            // 
+            this.courseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.courseComboBox.FormattingEnabled = true;
+            this.courseComboBox.Location = new System.Drawing.Point(290, 262);
+            this.courseComboBox.Name = "courseComboBox";
+            this.courseComboBox.Size = new System.Drawing.Size(121, 21);
+            this.courseComboBox.TabIndex = 18;
+            // 
             // add_task
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.courseComboBox);
             this.Controls.Add(this.addTaskReturn);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.note_course);
             this.Controls.Add(this.laa);
             this.Controls.Add(this.add_taskButt);
             this.Controls.Add(this.description);
@@ -159,9 +160,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox note_course;
         private System.Windows.Forms.Label laa;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button addTaskReturn;
+        private System.Windows.Forms.ComboBox courseComboBox;
     }
 }

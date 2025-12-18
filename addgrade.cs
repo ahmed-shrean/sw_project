@@ -35,11 +35,12 @@ G
 
         private void save_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(examname.Text) || string.IsNullOrWhiteSpace(course.Text)|| string.IsNullOrWhiteSpace(max_score.Text)|| string.IsNullOrWhiteSpace(score.Text))
+            if (string.IsNullOrWhiteSpace(examname.Text) || string.IsNullOrWhiteSpace(course.Text) || string.IsNullOrWhiteSpace(max_score.Text) || string.IsNullOrWhiteSpace(score.Text))
             {
                 MessageBox.Show("Please enter all the record.");
                 return;
             }
+
             string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -48,27 +49,24 @@ G
                 {
                     con.Open();
 
-                    // 2. The Smart Query: Finds the CourseID based on the Name and Inserts the Note
-                    string query = @"INSERT INTO Grades (ExamName, Score,MaxScore) 
-                             SELECT @ExamName, @Score,@MaxScore, CourseID 
-                             FROM Courses 
-                             WHERE CourseName = @CourseName";
+                    string query = @"INSERT INTO Grades (ExamName, Score, MaxScore, CourseID, UserID) 
+                         SELECT @ExamName, @Score, @MaxScore, CourseID, UserID 
+                         FROM Courses 
+                         WHERE CourseName = @CourseName AND UserID = @UserID";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        // 3. Add Parameters (Prevents errors and hacking)
                         cmd.Parameters.AddWithValue("@ExamName", examname.Text);
                         cmd.Parameters.AddWithValue("@CourseName", course.Text);
-                        cmd.Parameters.AddWithValue("@MaxScore", max_score.Text);
-                        cmd.Parameters.AddWithValue("@Score", score.Text);
+                        cmd.Parameters.AddWithValue("@MaxScore", float.Parse(max_score.Text));
+                        cmd.Parameters.AddWithValue("@Score", float.Parse(score.Text));
+                        cmd.Parameters.AddWithValue("@UserID", UserSession.UserID);
 
-                        // 4. Execute
                         int rowsAffected = cmd.ExecuteNonQuery();
 
-                        // 5. Check if it worked
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Note saved successfully!");
+                            MessageBox.Show("Grade saved successfully!");
                             examname.Clear();
                             course.Clear();
                             max_score.Clear();
@@ -76,8 +74,7 @@ G
                         }
                         else
                         {
-                            // If rowsAffected is 0, it means the Course Name didn't exist in the database
-                            MessageBox.Show("Error: The Course Name you entered does not exist. Please check the spelling.");
+                            MessageBox.Show("Error: Course not found for this user.");
                         }
                     }
                 }
@@ -86,7 +83,6 @@ G
                     MessageBox.Show("Database Error: " + ex.Message);
                 }
             }
-
         }
 
         private void gradesReturn_Click(object sender, EventArgs e)
