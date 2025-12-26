@@ -96,5 +96,40 @@ G
             this.Close();
 
         }
+
+        private void course_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void max_score_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void score_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void examname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

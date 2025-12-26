@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.logout = new System.Windows.Forms.Button();
             this.gradebutt = new System.Windows.Forms.Button();
             this.coursebutt = new System.Windows.Forms.Button();
             this.taskbutt = new System.Windows.Forms.Button();
@@ -37,21 +38,33 @@
             this.add_task_butt = new System.Windows.Forms.Button();
             this.take_note_butt = new System.Windows.Forms.Button();
             this.addGradebutt = new System.Windows.Forms.Button();
+            this.show_gpa = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.logout);
             this.panel1.Controls.Add(this.gradebutt);
             this.panel1.Controls.Add(this.coursebutt);
             this.panel1.Controls.Add(this.taskbutt);
             this.panel1.Controls.Add(this.notebutt);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 450);
             this.panel1.TabIndex = 0;
+            // 
+            // logout
+            // 
+            this.logout.BackColor = System.Drawing.Color.DodgerBlue;
+            this.logout.Location = new System.Drawing.Point(38, 406);
+            this.logout.Name = "logout";
+            this.logout.Size = new System.Drawing.Size(75, 23);
+            this.logout.TabIndex = 6;
+            this.logout.Text = "logout";
+            this.logout.UseVisualStyleBackColor = false;
+            this.logout.Click += new System.EventHandler(this.logout_Click);
             // 
             // gradebutt
             // 
@@ -153,11 +166,26 @@
             this.addGradebutt.UseVisualStyleBackColor = false;
             this.addGradebutt.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // show_gpa
+            // 
+            this.show_gpa.AutoSize = true;
+            this.show_gpa.BackColor = System.Drawing.Color.DarkOrange;
+            this.show_gpa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.show_gpa.Location = new System.Drawing.Point(362, 58);
+            this.show_gpa.Name = "show_gpa";
+            this.show_gpa.Size = new System.Drawing.Size(85, 20);
+            this.show_gpa.TabIndex = 7;
+            this.show_gpa.Text = "your gpa is";
+            this.show_gpa.Click += new System.EventHandler(this.show_gpa_Click);
+            // 
             // home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::SW_project.Properties.Resources.Gemini_Generated_Image_9dcotq9dcotq9dco;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(825, 450);
+            this.Controls.Add(this.show_gpa);
             this.Controls.Add(this.addGradebutt);
             this.Controls.Add(this.take_note_butt);
             this.Controls.Add(this.add_task_butt);
@@ -168,6 +196,7 @@
             this.Load += new System.EventHandler(this.home_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,5 +211,7 @@
         private System.Windows.Forms.Button add_task_butt;
         private System.Windows.Forms.Button take_note_butt;
         private System.Windows.Forms.Button addGradebutt;
+        private System.Windows.Forms.Button logout;
+        private System.Windows.Forms.Label show_gpa;
     }
 }

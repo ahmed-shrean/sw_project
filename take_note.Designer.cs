@@ -94,6 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::SW_project.Properties.Resources.add_task1;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.takeNoteReturn);
             this.Controls.Add(this.take_notebutt);

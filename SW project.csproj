@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -178,6 +178,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="take_note.resx">
       <DependentUpon>take_note.cs</DependentUpon>
@@ -210,6 +211,24 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gemini_Generated_Image_9dcotq9dcotq9dco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add ciurse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add task.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add grade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add task1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\log.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

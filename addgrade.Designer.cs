@@ -43,25 +43,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(166, 111);
+            this.label1.Location = new System.Drawing.Point(166, 124);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "exam name";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(166, 156);
+            this.label2.Location = new System.Drawing.Point(166, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "score";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(166, 194);
+            this.label3.Location = new System.Drawing.Point(166, 207);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
@@ -71,15 +73,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(166, 230);
+            this.label4.Location = new System.Drawing.Point(166, 243);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "course";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(259, 312);
+            this.save.Location = new System.Drawing.Point(259, 325);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 4;
@@ -89,31 +92,35 @@
             // 
             // examname
             // 
-            this.examname.Location = new System.Drawing.Point(259, 108);
+            this.examname.Location = new System.Drawing.Point(259, 121);
             this.examname.Name = "examname";
             this.examname.Size = new System.Drawing.Size(100, 20);
             this.examname.TabIndex = 5;
+            this.examname.TextChanged += new System.EventHandler(this.examname_TextChanged);
             // 
             // score
             // 
-            this.score.Location = new System.Drawing.Point(259, 156);
+            this.score.Location = new System.Drawing.Point(259, 169);
             this.score.Name = "score";
             this.score.Size = new System.Drawing.Size(100, 20);
             this.score.TabIndex = 6;
+            this.score.TextChanged += new System.EventHandler(this.score_TextChanged);
             // 
             // max_score
             // 
-            this.max_score.Location = new System.Drawing.Point(259, 194);
+            this.max_score.Location = new System.Drawing.Point(259, 207);
             this.max_score.Name = "max_score";
             this.max_score.Size = new System.Drawing.Size(100, 20);
             this.max_score.TabIndex = 7;
+            this.max_score.TextChanged += new System.EventHandler(this.max_score_TextChanged);
             // 
             // course
             // 
-            this.course.Location = new System.Drawing.Point(259, 230);
+            this.course.Location = new System.Drawing.Point(259, 243);
             this.course.Name = "course";
             this.course.Size = new System.Drawing.Size(100, 20);
             this.course.TabIndex = 8;
+            this.course.TextChanged += new System.EventHandler(this.course_TextChanged);
             // 
             // gradesReturn
             // 
@@ -130,6 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::SW_project.Properties.Resources.add_grade;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.gradesReturn);
             this.Controls.Add(this.course);

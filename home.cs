@@ -68,6 +68,45 @@ namespace SW_project
         private void home_Load(object sender, EventArgs e)
         {
 
+
+            string connectionString = "Data Source=.;Initial Catalog=StudentOrganizerDB;Integrated Security=True";
+
+            // Query بيحسب المتوسط الموزون: (الدرجة * الساعات) / مجموع الساعات
+            string query = @"SELECT 
+                        CASE 
+                            WHEN SUM(c.CreditHours) = 0 THEN 0 
+                            ELSE SUM((g.Score / g.MaxScore) * 4.0 * c.CreditHours) / SUM(c.CreditHours) 
+                        END as GPA
+                     FROM Grades g
+                     INNER JOIN Courses c ON g.CourseID = c.CourseID
+                     WHERE g.UserID = @uid";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@uid", UserSession.UserID);
+
+                    con.Open();
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        double gpa = Convert.ToDouble(result);
+                        // عرض النتيجة وتقريبها لأقرب رقمين عشريين
+                        show_gpa.Text = "Your GPA: " + gpa.ToString("0.00");
+                    }
+                    else
+                    {
+                        show_gpa.Text = "Your GPA: 0.00";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error calculating GPA: " + ex.Message);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -113,5 +152,22 @@ namespace SW_project
 
             this.Hide();
         }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            Formlogin nextForm = new Formlogin();
+
+
+            nextForm.Show();
+
+
+            this.Hide();
+        }
+
+        private void show_gpa_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-}
+    }
+

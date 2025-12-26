@@ -22,3 +22,4 @@ C:\Users\M L A\source\repos\SW project\SW project\bin\Debug\SW project.applicati
 C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.exe.manifest
 C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.application
 C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW_project.addgrade.resources
+C:\Users\M L A\source\repos\SW project\SW project\obj\Debug\SW project.exe.config
